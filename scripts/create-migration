@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+MIGRATION_NAME="$1"
+
+if [ -z "${MIGRATION_NAME}" ]; then
+  echo "usage: create-migration [migration-name]"
+  exit 2
+fi
+
+DATE=$(date '+%Y%m%d%H%M%S')
+FILENAME="V${DATE}__${MIGRATION_NAME}.sql"
+
+cat > "migrations/$FILENAME" <<- EOM
+-- ${MIGRATION_NAME}
+--
+-- What does this migration do and why?
+EOM
